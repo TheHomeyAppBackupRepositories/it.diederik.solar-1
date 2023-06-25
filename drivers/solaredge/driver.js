@@ -38,4 +38,3 @@ class SolarEdgeDriver extends homey_1.Driver {
     }
 }
 module.exports = SolarEdgeDriver;
-//# sourceMappingURL=driver.js.map

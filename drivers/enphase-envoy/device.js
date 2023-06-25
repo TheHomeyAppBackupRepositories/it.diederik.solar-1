@@ -100,4 +100,3 @@ class EnphaseEnvoy extends inverter_1.Inverter {
     }
 }
 module.exports = EnphaseEnvoy;
-//# sourceMappingURL=device.js.map

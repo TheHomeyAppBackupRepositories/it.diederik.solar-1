@@ -36,7 +36,9 @@ class GrowattApi {
             body,
         });
         // TODO: handle additional errors
-        if (!response.ok) {
+        if (!response.ok ||
+            // If session is expired, request is redirected
+            response.url.includes("errorMess=errorNoLogin")) {
             throw new Error(error);
         }
         // TODO: grab cookies
@@ -56,35 +58,36 @@ class GrowattApi {
             throw new Error(error);
         }
     }
-    async getDeviceList(plantId) {
+    async getPlantDevices(plantId) {
         const error = `Could not get device list for plant ${plantId} from Growatt server`;
         const plantData = await this.fetchApiEndpoint(`${this.plantUrl}?op=getAllDeviceList&plantId=${plantId}`, "GET", undefined, error);
         return plantData.deviceList;
     }
-    async getInverterSerialNumbers() {
-        await this.login();
-        let serialNumbers = [];
-        for (let plant of this.plants) {
-            const deviceList = await this.getDeviceList(plant.plantId);
+    // Returns a prepared list with devices under an account (for usage in pairing flow)
+    async getDeviceData() {
+        let devices = [];
+        for (let plant of [...this.plants]) {
+            await this.login();
+            const deviceList = await this.getPlantDevices(plant.plantId);
             const inverters = deviceList.filter((device) => ["inverter", "tlx"].includes(device.deviceType));
-            serialNumbers.push(...inverters.map((device) => device.deviceSn));
+            devices.push(...inverters.map((device) => ({
+                id: device.deviceSn,
+                plantId: plant.plantId,
+            })));
         }
-        return serialNumbers;
+        return devices;
     }
-    async getInverterProductionData(serialNumber) {
+    async getInverterProductionData(deviceData) {
         await this.login();
-        for (let plant of this.plants) {
-            const deviceList = await this.getDeviceList(plant.plantId);
-            const device = deviceList.find((device) => device.deviceSn === serialNumber);
-            if (device) {
-                return {
-                    currentPower: Number(device.power),
-                    energyToday: Number(device.eToday),
-                };
-            }
+        const deviceList = await this.getPlantDevices(deviceData.plantId);
+        const device = deviceList.find((device) => device.deviceSn === deviceData.id);
+        if (device) {
+            return {
+                currentPower: Number(device.power),
+                energyToday: Number(device.eToday),
+            };
         }
         return null;
     }
 }
 exports.default = GrowattApi;
-//# sourceMappingURL=api.js.map

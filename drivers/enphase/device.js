@@ -63,4 +63,3 @@ class EnphaseDevice extends inverter_1.Inverter {
     }
 }
 module.exports = EnphaseDevice;
-//# sourceMappingURL=device.js.map

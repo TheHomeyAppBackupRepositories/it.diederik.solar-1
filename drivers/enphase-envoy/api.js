@@ -35,4 +35,3 @@ class EnphaseEnvoyApi {
     }
 }
 exports.default = EnphaseEnvoyApi;
-//# sourceMappingURL=api.js.map

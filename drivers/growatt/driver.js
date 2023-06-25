@@ -18,10 +18,11 @@ class GrowattDriver extends homey_1.Driver {
         });
         session.setHandler("list_devices", async () => {
             const api = new api_1.default(username, password);
-            const serialNumbers = await api.getInverterSerialNumbers();
-            const devices = serialNumbers.map((serialNumber) => ({
-                name: serialNumber,
-                data: { id: serialNumber },
+            await api.login();
+            const deviceData = await api.getDeviceData();
+            const devices = deviceData.map(({ id, plantId }) => ({
+                name: id,
+                data: { id, plantId },
                 settings: { username, password },
             }));
             return devices;
@@ -29,4 +30,3 @@ class GrowattDriver extends homey_1.Driver {
     }
 }
 module.exports = GrowattDriver;
-//# sourceMappingURL=driver.js.map

@@ -37,4 +37,3 @@ class EnphaseEnlightenApi {
     }
 }
 exports.default = EnphaseEnlightenApi;
-//# sourceMappingURL=api.js.map

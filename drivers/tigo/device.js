@@ -53,4 +53,3 @@ class TigoDevice extends inverter_1.Inverter {
     }
 }
 module.exports = TigoDevice;
-//# sourceMappingURL=device.js.map

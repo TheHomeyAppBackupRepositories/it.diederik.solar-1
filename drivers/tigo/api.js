@@ -35,4 +35,3 @@ class TigoApi {
     }
 }
 exports.default = TigoApi;
-//# sourceMappingURL=api.js.map

@@ -34,4 +34,3 @@ class TigoDriver extends homey_1.Driver {
     }
 }
 module.exports = TigoDriver;
-//# sourceMappingURL=driver.js.map

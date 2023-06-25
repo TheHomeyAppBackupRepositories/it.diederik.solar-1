@@ -114,4 +114,3 @@ class PvOutputDevice extends inverter_1.Inverter {
     }
 }
 module.exports = PvOutputDevice;
-//# sourceMappingURL=device.js.map

@@ -129,4 +129,3 @@ class SolarEdgeDevice extends inverter_1.Inverter {
     }
 }
 module.exports = SolarEdgeDevice;
-//# sourceMappingURL=device.js.map

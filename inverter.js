@@ -25,4 +25,3 @@ class Inverter extends homey_1.Device {
     }
 }
 exports.Inverter = Inverter;
-//# sourceMappingURL=inverter.js.map

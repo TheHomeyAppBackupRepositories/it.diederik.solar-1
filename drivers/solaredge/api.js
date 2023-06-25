@@ -89,4 +89,3 @@ class SolarEdgeApi {
     }
 }
 exports.default = SolarEdgeApi;
-//# sourceMappingURL=api.js.map

@@ -19,4 +19,3 @@ class EnphaseEnvoyDriver extends homey_1.Driver {
     }
 }
 module.exports = EnphaseEnvoyDriver;
-//# sourceMappingURL=driver.js.map

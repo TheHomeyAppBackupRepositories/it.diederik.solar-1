@@ -8,10 +8,15 @@ const api_1 = __importDefault(require("./api"));
 class GrowattDevice extends inverter_1.Inverter {
     constructor() {
         super(...arguments);
-        this.interval = 60;
+        this.interval = 15;
     }
     async onInit() {
         const settings = this.getSettings();
+        const data = this.getData();
+        // Migration: plantId should be part of device data since June 10, 2023
+        if (!data.plantId) {
+            this.setUnavailable("Please remove and re-add your Growatt device");
+        }
         this.api = new api_1.default(settings.username, settings.password);
         await this.api.login();
         super.onInit();
@@ -26,11 +31,15 @@ class GrowattDevice extends inverter_1.Inverter {
     async checkProduction() {
         this.homey.log("Checking production");
         const data = this.getData();
+        // Migration: plantId should be part of device data since June 10, 2023
+        if (!data.plantId) {
+            return;
+        }
         if (this.api) {
-            const production = await this.api.getInverterProductionData(data.id);
-            if (production !== null) {
-                const currentEnergy = production.energyToday;
-                const currentPower = production.currentPower;
+            const productionData = await this.api.getInverterProductionData(data);
+            if (productionData !== null) {
+                const currentEnergy = productionData.energyToday;
+                const currentPower = productionData.currentPower;
                 this.setCapabilityValue("meter_power", currentEnergy);
                 this.setCapabilityValue("measure_power", currentPower);
                 this.homey.log(`Current energy is ${currentEnergy}kWh`);
@@ -47,4 +56,3 @@ class GrowattDevice extends inverter_1.Inverter {
     }
 }
 module.exports = GrowattDevice;
-//# sourceMappingURL=device.js.map
