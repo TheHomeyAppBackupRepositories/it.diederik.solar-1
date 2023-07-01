@@ -1,1 +1,658 @@
-{"_comment":"This file is generated. Please edit .homeycompose/app.json instead.","id":"it.diederik.solar","version":"5.2.0","compatibility":">=5.0.0","sdk":3,"brandColor":"#0c1845","name":{"en":"Solar Panels","nl":"Zonnepanelen"},"description":{"en":"Let the sun power your home","nl":"Laat de zon je huis van stroom voorzien"},"category":"energy","platforms":["local","cloud"],"tags":{"en":["solar","panels","pv"],"nl":["zonnepanelen","solar","pv"]},"images":{"xlarge":"./assets/images/xlarge.png","large":"./assets/images/large.png","small":"./assets/images/small.png"},"author":{"name":"Diederik Bakker"},"contributors":{"developers":[{"name":"Diederik Bakker","email":"diederik@outlook.com"},{"name":"Rob (pro-sumer on GitHub)"},{"name":"Max van de Laar"},{"name":"Dries Hooghe","email":"dries@drieshooghe.com"}]},"contributing":{"donate":{"paypal":{"username":"diederik"}}},"bugs":{"url":"https://github.com/DiedB/Homey-SolarPanels/issues"},"source":"https://github.com/DiedB/Homey-SolarPanels","homepage":"https://diederik.gitbook.io/homey-solar-panels-app/","support":"https://diederik.gitbook.io/homey-solar-panels-app/faq","homeyCommunityTopicId":44273,"drivers":[{"name":{"en":"Enphase Enlighten"},"class":"solarpanel","capabilities":["measure_power","meter_power"],"images":{"large":"/drivers/enphase/assets/images/large.jpg","small":"/drivers/enphase/assets/images/small.jpg"},"connectivity":["cloud"],"platforms":["local","cloud"],"pair":[{"id":"pair"},{"id":"list_devices","template":"list_devices","navigation":{"next":"add_devices"}},{"id":"add_devices","template":"add_devices"}],"id":"enphase","settings":[{"type":"group","label":{"en":"Enphase Enlighten credentials"},"children":[{"id":"uid","type":"text","label":{"en":"User ID"}},{"id":"key","type":"password","label":{"en":"API key"}}]},{"id":"interval","type":"number","label":{"en":"Check interval","nl":"Controle-interval"},"hint":{"en":"Increase this value if you are using other apps that use the Enphase API. A value lower than 5 is not recommended as it might cause the app to hit Enphase rate limits.","nl":"Verhoog deze waarde als je andere apps gebruikt die de Enphase API gebruiken. Een waarde lager dan 5 wordt niet aangeraden omdat de app tegen de door Enphase gestelde limieten aan kan lopen."},"value":5,"min":5,"units":{"en":"minutes","nl":"minuten"}}]},{"name":{"en":"Enphase Envoy"},"class":"solarpanel","capabilities":["measure_power","measure_power.consumption","meter_power","meter_power.consumption"],"connectivity":["lan"],"platforms":["local"],"discovery":"enphase-envoy","pair":[{"id":"list_devices","template":"list_devices","navigation":{"next":"add_devices"}},{"id":"add_devices","template":"add_devices"}],"images":{"small":"/drivers/enphase-envoy/assets/images/small.jpg","large":"/drivers/enphase-envoy/assets/images/large.jpg"},"capabilitiesOptions":{"meter_power":{"title":{"en":"Energy yield (today)","nl":"Energieproductie (vandaag)"}},"meter_power.consumption":{"title":{"en":"Energy usage (today)","nl":"Energieverbruik (vandaag)"}},"measure_power":{"title":{"en":"Power (production)","nl":"Vermogen (productie)"}},"measure_power.consumption":{"title":{"en":"Power (consumption)","nl":"Vermogen (gebruik)"}}},"id":"enphase-envoy"},{"name":{"en":"Growatt"},"connectivity":["cloud"],"platforms":["local","cloud"],"class":"solarpanel","capabilities":["measure_power","meter_power"],"images":{"small":"/drivers/growatt/assets/images/small.jpg","large":"/drivers/growatt/assets/images/large.jpg"},"pair":[{"id":"login_credentials","template":"login_credentials","options":{"logo":"pair.svg"}},{"id":"list_devices","template":"list_devices","navigation":{"next":"add_devices"}},{"id":"add_devices","template":"add_devices"}],"id":"growatt","settings":[{"type":"group","label":{"en":"Growatt credentials"},"children":[{"id":"username","type":"text","label":{"en":"Username"}},{"id":"password","type":"password","label":{"en":"Password"}}]}]},{"name":{"en":"PVOutput"},"class":"solarpanel","capabilities":["measure_power","meter_power"],"images":{"small":"/drivers/pvoutput/assets/images/small.jpg","large":"/drivers/pvoutput/assets/images/large.jpg"},"connectivity":["cloud"],"platforms":["local","cloud"],"pair":[{"id":"pair"},{"id":"list_devices","template":"list_devices","navigation":{"next":"add_devices"}},{"id":"add_devices","template":"add_devices"}],"capabilitiesOptions":{"meter_power":{"title":{"en":"Energy yield (today)","nl":"Energieproductie (vandaag)"}},"meter_power.consumption":{"title":{"en":"Energy usage (today)","nl":"Energieverbruik (vandaag)"}},"measure_power":{"title":{"en":"Power (production)","nl":"Vermogen (productie)"}},"measure_power.consumption":{"title":{"en":"Power (consumption)","nl":"Vermogen (gebruik)"}}},"id":"pvoutput","settings":[{"type":"group","label":{"en":"PVOutput login details"},"children":[{"id":"key","type":"password","label":{"en":"Read-only API key"}}]},{"id":"interval","type":"number","label":{"en":"Check interval","nl":"Controle-interval"},"hint":{"en":"Increase this value if you are using other apps that use the PvOutput API. Decrease this value if you are in PVOutput Donation mode.","nl":"Verhoog deze waarde als je andere apps gebruikt die de PVOutput API gebruiken. Verlaag deze waarde als je aan PVOutput doneert."},"value":5,"min":1,"units":{"en":"minutes","nl":"minuten"}},{"type":"group","label":{"en":"Advanced settings"},"hint":{"en":"If you are a PVOutput donator and use extended fields, set them up here."},"children":[{"id":"useExtendedFields","type":"checkbox","value":false,"label":{"en":"Use PVOutput extended fields"}},{"id":"batteryPercentageField","type":"dropdown","value":"-1","label":{"en":"Field ID for battery percentage"},"values":[{"id":"-1","label":{"en":"-"}},{"id":"7","label":{"en":"Field 7"}},{"id":"8","label":{"en":"Field 8"}},{"id":"9","label":{"en":"Field 9"}},{"id":"10","label":{"en":"Field 10"}},{"id":"11","label":{"en":"Field 11"}},{"id":"12","label":{"en":"Field 12"}}]}]}]},{"name":{"en":"SolarEdge","nl":"SolarEdge"},"pair":[{"id":"pair"},{"id":"list_devices","template":"list_devices","navigation":{"next":"add_devices"}},{"id":"add_devices","template":"add_devices"}],"images":{"large":"/drivers/solaredge/assets/images/large.jpg","small":"/drivers/solaredge/assets/images/small.jpg"},"connectivity":["cloud"],"platforms":["local","cloud"],"class":"solarpanel","capabilities":["measure_power","meter_power","measure_temperature","meter_power.total"],"capabilitiesOptions":{"measure_temperature":{"title":{"en":"Inverter temperature","nl":"Temperatuur omvormer"}},"meter_power":{"title":{"en":"Energy yield (today)","nl":"Energieproductie (vandaag)"}},"meter_power.consumption":{"title":{"en":"Energy usage (today)","nl":"Energieverbruik (vandaag)"}},"meter_power.total":{"title":{"en":"Energy yield (total)","nl":"Energieproductie (totaal)"}},"measure_power":{"title":{"en":"Power (production)","nl":"Vermogen (productie)"}},"measure_power.consumption":{"title":{"en":"Power (consumption)","nl":"Vermogen (gebruik)"}}},"id":"solaredge","settings":[{"id":"key","type":"password","label":{"en":"SolarEdge (read-only) API key"}},{"id":"interval","type":"number","label":{"en":"Check interval","nl":"Controle-interval"},"hint":{"en":"Increase this value if you are using other apps that use the SolarEdge API. A value lower than 15 is not recommended as it might cause the app to hit SolarEdge rate limits.","nl":"Verhoog deze waarde als je andere apps gebruikt die de SolarEdge API gebruiken. Een waarde lager dan 15 wordt niet aangeraden omdat de app tegen de door SolarEdge gestelde limieten aan kan lopen."},"value":15,"min":10,"units":{"en":"minutes","nl":"minuten"}}]},{"name":{"en":"Tigo"},"connectivity":["cloud"],"platforms":["local","cloud"],"class":"solarpanel","capabilities":["measure_power","meter_power"],"images":{"small":"/drivers/tigo/assets/images/small.jpg","large":"/drivers/tigo/assets/images/large.jpg"},"pair":[{"id":"login_credentials","template":"login_credentials","options":{"logo":"pair.svg"}},{"id":"list_devices","template":"list_devices","navigation":{"next":"add_devices"}},{"id":"add_devices","template":"add_devices"}],"id":"tigo","settings":[{"type":"group","label":{"en":"Tigo credentials"},"children":[{"id":"username","type":"text","label":{"en":"Username"}},{"id":"password","type":"password","label":{"en":"Password"}}]}]}],"capabilities":{"battery_soc":{"type":"number","title":{"en":"Battery SoC","nl":"Batterij-percentage"},"icon":"/assets/capabilities/battery-soc.svg","units":{"en":"%"},"insights":true,"desc":{"en":"Battery SoC percentage"},"chartType":"stepLine","decimals":2,"getable":true,"setable":false,"uiComponent":"sensor"}},"discovery":{"enphase-envoy":{"type":"mdns-sd","mdns-sd":{"name":"enphase-envoy","protocol":"tcp"},"id":"{{txt.serialnum}}"}}}
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "it.diederik.solar",
+  "version": "5.2.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#0c1845",
+  "name": {
+    "en": "Solar Panels",
+    "nl": "Zonnepanelen"
+  },
+  "description": {
+    "en": "Let the sun power your home",
+    "nl": "Laat de zon je huis van stroom voorzien"
+  },
+  "category": "energy",
+  "platforms": [
+    "local",
+    "cloud"
+  ],
+  "tags": {
+    "en": [
+      "solar",
+      "panels",
+      "pv"
+    ],
+    "nl": [
+      "zonnepanelen",
+      "solar",
+      "pv"
+    ]
+  },
+  "images": {
+    "xlarge": "./assets/images/xlarge.png",
+    "large": "./assets/images/large.png",
+    "small": "./assets/images/small.png"
+  },
+  "author": {
+    "name": "Diederik Bakker"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Diederik Bakker",
+        "email": "diederik@outlook.com"
+      },
+      {
+        "name": "Rob (pro-sumer on GitHub)"
+      },
+      {
+        "name": "Max van de Laar"
+      },
+      {
+        "name": "Dries Hooghe",
+        "email": "dries@drieshooghe.com"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "diederik"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/DiedB/Homey-SolarPanels/issues"
+  },
+  "source": "https://github.com/DiedB/Homey-SolarPanels",
+  "homepage": "https://diederik.gitbook.io/homey-solar-panels-app/",
+  "support": "https://diederik.gitbook.io/homey-solar-panels-app/faq",
+  "homeyCommunityTopicId": 44273,
+  "drivers": [
+    {
+      "name": {
+        "en": "Enphase Enlighten"
+      },
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "images": {
+        "large": "/drivers/enphase/assets/images/large.jpg",
+        "small": "/drivers/enphase/assets/images/small.jpg"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "pair"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "enphase",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Enphase Enlighten credentials"
+          },
+          "children": [
+            {
+              "id": "uid",
+              "type": "text",
+              "label": {
+                "en": "User ID"
+              }
+            },
+            {
+              "id": "key",
+              "type": "password",
+              "label": {
+                "en": "API key"
+              }
+            }
+          ]
+        },
+        {
+          "id": "interval",
+          "type": "number",
+          "label": {
+            "en": "Check interval",
+            "nl": "Controle-interval"
+          },
+          "hint": {
+            "en": "Increase this value if you are using other apps that use the Enphase API. A value lower than 5 is not recommended as it might cause the app to hit Enphase rate limits.",
+            "nl": "Verhoog deze waarde als je andere apps gebruikt die de Enphase API gebruiken. Een waarde lager dan 5 wordt niet aangeraden omdat de app tegen de door Enphase gestelde limieten aan kan lopen."
+          },
+          "value": 5,
+          "min": 5,
+          "units": {
+            "en": "minutes",
+            "nl": "minuten"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Enphase Envoy"
+      },
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "measure_power.consumption",
+        "meter_power",
+        "meter_power.consumption"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "discovery": "enphase-envoy",
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/enphase-envoy/assets/images/small.jpg",
+        "large": "/drivers/enphase-envoy/assets/images/large.jpg"
+      },
+      "capabilitiesOptions": {
+        "meter_power": {
+          "title": {
+            "en": "Energy yield (today)",
+            "nl": "Energieproductie (vandaag)"
+          }
+        },
+        "meter_power.consumption": {
+          "title": {
+            "en": "Energy usage (today)",
+            "nl": "Energieverbruik (vandaag)"
+          }
+        },
+        "measure_power": {
+          "title": {
+            "en": "Power (production)",
+            "nl": "Vermogen (productie)"
+          }
+        },
+        "measure_power.consumption": {
+          "title": {
+            "en": "Power (consumption)",
+            "nl": "Vermogen (gebruik)"
+          }
+        }
+      },
+      "id": "enphase-envoy"
+    },
+    {
+      "name": {
+        "en": "Growatt"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "images": {
+        "small": "/drivers/growatt/assets/images/small.jpg",
+        "large": "/drivers/growatt/assets/images/large.jpg"
+      },
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "pair.svg"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "growatt",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Growatt credentials"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Username"
+              }
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "PVOutput"
+      },
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "images": {
+        "small": "/drivers/pvoutput/assets/images/small.jpg",
+        "large": "/drivers/pvoutput/assets/images/large.jpg"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "pair"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "capabilitiesOptions": {
+        "meter_power": {
+          "title": {
+            "en": "Energy yield (today)",
+            "nl": "Energieproductie (vandaag)"
+          }
+        },
+        "meter_power.consumption": {
+          "title": {
+            "en": "Energy usage (today)",
+            "nl": "Energieverbruik (vandaag)"
+          }
+        },
+        "measure_power": {
+          "title": {
+            "en": "Power (production)",
+            "nl": "Vermogen (productie)"
+          }
+        },
+        "measure_power.consumption": {
+          "title": {
+            "en": "Power (consumption)",
+            "nl": "Vermogen (gebruik)"
+          }
+        }
+      },
+      "id": "pvoutput",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "PVOutput login details"
+          },
+          "children": [
+            {
+              "id": "key",
+              "type": "password",
+              "label": {
+                "en": "Read-only API key"
+              }
+            }
+          ]
+        },
+        {
+          "id": "interval",
+          "type": "number",
+          "label": {
+            "en": "Check interval",
+            "nl": "Controle-interval"
+          },
+          "hint": {
+            "en": "Increase this value if you are using other apps that use the PvOutput API. Decrease this value if you are in PVOutput Donation mode.",
+            "nl": "Verhoog deze waarde als je andere apps gebruikt die de PVOutput API gebruiken. Verlaag deze waarde als je aan PVOutput doneert."
+          },
+          "value": 5,
+          "min": 1,
+          "units": {
+            "en": "minutes",
+            "nl": "minuten"
+          }
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Advanced settings"
+          },
+          "hint": {
+            "en": "If you are a PVOutput donator and use extended fields, set them up here."
+          },
+          "children": [
+            {
+              "id": "useExtendedFields",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Use PVOutput extended fields"
+              }
+            },
+            {
+              "id": "batteryPercentageField",
+              "type": "dropdown",
+              "value": "-1",
+              "label": {
+                "en": "Field ID for battery percentage"
+              },
+              "values": [
+                {
+                  "id": "-1",
+                  "label": {
+                    "en": "-"
+                  }
+                },
+                {
+                  "id": "7",
+                  "label": {
+                    "en": "Field 7"
+                  }
+                },
+                {
+                  "id": "8",
+                  "label": {
+                    "en": "Field 8"
+                  }
+                },
+                {
+                  "id": "9",
+                  "label": {
+                    "en": "Field 9"
+                  }
+                },
+                {
+                  "id": "10",
+                  "label": {
+                    "en": "Field 10"
+                  }
+                },
+                {
+                  "id": "11",
+                  "label": {
+                    "en": "Field 11"
+                  }
+                },
+                {
+                  "id": "12",
+                  "label": {
+                    "en": "Field 12"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "SolarEdge",
+        "nl": "SolarEdge"
+      },
+      "pair": [
+        {
+          "id": "pair"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "large": "/drivers/solaredge/assets/images/large.jpg",
+        "small": "/drivers/solaredge/assets/images/small.jpg"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "meter_power",
+        "measure_temperature",
+        "meter_power.total"
+      ],
+      "capabilitiesOptions": {
+        "measure_temperature": {
+          "title": {
+            "en": "Inverter temperature",
+            "nl": "Temperatuur omvormer"
+          }
+        },
+        "meter_power": {
+          "title": {
+            "en": "Energy yield (today)",
+            "nl": "Energieproductie (vandaag)"
+          }
+        },
+        "meter_power.consumption": {
+          "title": {
+            "en": "Energy usage (today)",
+            "nl": "Energieverbruik (vandaag)"
+          }
+        },
+        "meter_power.total": {
+          "title": {
+            "en": "Energy yield (total)",
+            "nl": "Energieproductie (totaal)"
+          }
+        },
+        "measure_power": {
+          "title": {
+            "en": "Power (production)",
+            "nl": "Vermogen (productie)"
+          }
+        },
+        "measure_power.consumption": {
+          "title": {
+            "en": "Power (consumption)",
+            "nl": "Vermogen (gebruik)"
+          }
+        }
+      },
+      "id": "solaredge",
+      "settings": [
+        {
+          "id": "key",
+          "type": "password",
+          "label": {
+            "en": "SolarEdge (read-only) API key"
+          }
+        },
+        {
+          "id": "interval",
+          "type": "number",
+          "label": {
+            "en": "Check interval",
+            "nl": "Controle-interval"
+          },
+          "hint": {
+            "en": "Increase this value if you are using other apps that use the SolarEdge API. A value lower than 15 is not recommended as it might cause the app to hit SolarEdge rate limits.",
+            "nl": "Verhoog deze waarde als je andere apps gebruikt die de SolarEdge API gebruiken. Een waarde lager dan 15 wordt niet aangeraden omdat de app tegen de door SolarEdge gestelde limieten aan kan lopen."
+          },
+          "value": 15,
+          "min": 10,
+          "units": {
+            "en": "minutes",
+            "nl": "minuten"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Tigo"
+      },
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "images": {
+        "small": "/drivers/tigo/assets/images/small.jpg",
+        "large": "/drivers/tigo/assets/images/large.jpg"
+      },
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "pair.svg"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "tigo",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Tigo credentials"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Username"
+              }
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "battery_soc": {
+      "type": "number",
+      "title": {
+        "en": "Battery SoC",
+        "nl": "Batterij-percentage"
+      },
+      "icon": "/assets/capabilities/battery-soc.svg",
+      "units": {
+        "en": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Battery SoC percentage"
+      },
+      "chartType": "stepLine",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    }
+  },
+  "discovery": {
+    "enphase-envoy": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "enphase-envoy",
+        "protocol": "tcp"
+      },
+      "id": "{{txt.serialnum}}"
+    }
+  }
+}
