@@ -82,7 +82,7 @@ class SolarEdgeApi {
                 throw new Error("API key usage limit has been exceeded. Try to increase the interval in the device settings.");
             }
             else {
-                throw new Error("An unknown error occurred while fetching inverter data.");
+                throw new Error(`An unknown error occurred (status ${response.status}) while fetching inverter data.`);
             }
         }
         return response.json();

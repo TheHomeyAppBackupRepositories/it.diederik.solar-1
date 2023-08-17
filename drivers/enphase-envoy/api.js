@@ -33,5 +33,27 @@ class EnphaseEnvoyApi {
     async getProductionData() {
         return this.fetchApiEndpoint(`http://${this.address}/production.json?details=1`);
     }
+    // Get software version to detect upgrade to Envoy v7
+    // If this is the case, we direct users to remove and re-add their device
+    async getEnvoySoftwareVersion() {
+        const response = await fetch(`http://${this.address}/info.xml`, {
+            // Allow self-signed SSL (newer Envoy firmware seems to use HTTPS)
+            agent: (parsedUrl) => {
+                if (parsedUrl.protocol == "http:") {
+                    return new node_http_1.default.Agent();
+                }
+                else {
+                    return new node_https_1.default.Agent({
+                        rejectUnauthorized: false,
+                    });
+                }
+            },
+        });
+        const envoyInfo = response.text();
+        let regex = /<software>(.*?)<\/software>/;
+        let match = envoyInfo.match(regex);
+        let softwareVersion = match ? match[1] : null;
+        return softwareVersion;
+    }
 }
 exports.default = EnphaseEnvoyApi;
