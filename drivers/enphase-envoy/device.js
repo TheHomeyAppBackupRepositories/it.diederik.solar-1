@@ -41,7 +41,7 @@ class EnphaseEnvoy extends inverter_1.Inverter {
         await this.setAvailable();
     }
     async checkProduction() {
-        this.log("Checking production");
+        this.homey.log("Checking production");
         if (this.enphaseApi && !this.hasUpdatedPastSupport) {
             try {
                 // Check whether the device has upgraded to v7
@@ -49,13 +49,13 @@ class EnphaseEnvoy extends inverter_1.Inverter {
                 if (softwareVersion !== null && softwareVersion.startsWith("D7")) {
                     // Enphase Envoy has updated to v7, user needs to migrate
                     this.hasUpdatedPastSupport = true;
-                    this.log("Enphase Envoy has updated to firmware D7x - suggesting user to upgrade to new driver");
+                    this.homey.log("Enphase Envoy has updated to firmware D7x - suggesting user to upgrade to new driver");
                     this.setUnavailable("Your Enphase Envoy has received a software update that requires re-pairing the device to Homey. Please remove your Envoy device from Homey and re-add it.");
                     return;
                 }
             }
             catch (err) {
-                this.log("Failed checking for Envoy software version");
+                this.homey.log("Failed checking for Envoy software version");
             }
             try {
                 const productionData = await this.enphaseApi.getProductionData();
@@ -89,17 +89,17 @@ class EnphaseEnvoy extends inverter_1.Inverter {
                 }
                 if (currentProductionEnergy !== null) {
                     await this.setCapabilityValue("meter_power", currentProductionEnergy);
-                    this.log(`Current production energy is ${currentProductionEnergy}kWh`);
+                    this.homey.log(`Current production energy is ${currentProductionEnergy}kWh`);
                 }
                 await this.setCapabilityValue("measure_power", currentProductionPower);
-                this.log(`Current production power is ${currentProductionPower}W`);
+                this.homey.log(`Current production power is ${currentProductionPower}W`);
                 if (hasConsumption) {
                     const currentConsumptionPower = productionData.consumption[0].wNow;
                     const currentConsumptionEnergy = productionData.consumption[0].whToday / 1000;
                     await this.setCapabilityValue("measure_power.consumption", currentConsumptionPower);
                     await this.setCapabilityValue("meter_power.consumption", currentConsumptionEnergy);
-                    this.log(`Current consumption power is ${currentConsumptionPower}W`);
-                    this.log(`Current consumption energy is ${currentConsumptionEnergy}W`);
+                    this.homey.log(`Current consumption power is ${currentConsumptionPower}W`);
+                    this.homey.log(`Current consumption energy is ${currentConsumptionEnergy}W`);
                 }
                 await this.setAvailable();
             }

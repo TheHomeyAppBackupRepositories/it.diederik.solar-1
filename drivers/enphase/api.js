@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = require("node-fetch");
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
+async function fetch(...args) {
+    const { default: fetch } = await _importDynamic("node-fetch");
+    return fetch(...args);
+}
 class EnphaseEnlightenApi {
     constructor(userId, apiKey, systemId) {
         this.baseUrl = "https://api.enphaseenergy.com/api/v2";

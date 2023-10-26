@@ -3,7 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = require("node-fetch");
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
+async function fetch(...args) {
+    const { default: fetch } = await _importDynamic("node-fetch");
+    return fetch(...args);
+}
 const node_http_1 = __importDefault(require("node:http"));
 const node_https_1 = __importDefault(require("node:https"));
 class EnphaseEnvoyApi {

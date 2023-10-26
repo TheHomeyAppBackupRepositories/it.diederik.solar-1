@@ -5,13 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = require("node-fetch");
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
+async function fetch(...args) {
+    const { default: fetch } = await _importDynamic("node-fetch");
+    return fetch(...args);
+}
 const crypto_1 = __importDefault(require("crypto"));
 class GrowattApi {
     constructor(username, password) {
         this.plants = [];
         this.cookies = null;
-        this.baseUrl = "https://server-api.growatt.com";
+        this.baseUrl = "https://server.growatt.com";
         this.loginUrl = `${this.baseUrl}/newTwoLoginAPI.do`;
         this.plantUrl = `${this.baseUrl}/newTwoPlantAPI.do`;
         this.username = username;
@@ -27,7 +31,7 @@ class GrowattApi {
         const response = await fetch(url, {
             method,
             headers: {
-                "User-Agent": "ShinePhone/7.1.0 (iPhone; iOS 16.1.1; Scale/3.00)",
+                "User-Agent": "ShinePhone/8.0.2 (iPhone; iOS 16.6; Scale/3.00)",
                 ...(body !== undefined
                     ? { "Content-Type": "application/x-www-form-urlencoded" }
                     : {}),
@@ -50,7 +54,10 @@ class GrowattApi {
     async login() {
         this.cookies = null;
         const error = "Could not login to Growatt server";
-        const loginData = await this.fetchApiEndpoint(this.loginUrl, "POST", `userName=${this.username}&password=${this.password}`, error);
+        const loginData = await this.fetchApiEndpoint(this.loginUrl, "POST", new URLSearchParams({
+            password: this.password,
+            userName: this.username,
+        }), error);
         if (loginData.back.success) {
             this.plants = loginData.back.data;
         }

@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = require("node-fetch");
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
+async function fetch(...args) {
+    const { default: fetch } = await _importDynamic("node-fetch");
+    return fetch(...args);
+}
 class TigoApi {
     constructor(username, password, systemId) {
         this.baseUrl = "https://api2.tigoenergy.com/api/v3";

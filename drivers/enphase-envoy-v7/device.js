@@ -48,7 +48,7 @@ class EnphaseEnvoy extends inverter_1.Inverter {
         await this.setAvailable();
     }
     async checkProduction() {
-        this.log("Checking production");
+        this.homey.log("Checking production");
         if (this.enphaseApi) {
             try {
                 // Determine whether Envoy is metered
@@ -62,11 +62,11 @@ class EnphaseEnvoy extends inverter_1.Inverter {
                 const productionData = await this.enphaseApi.getProductionData();
                 const currentEnergy = productionData.wattHoursToday / 1000;
                 await this.setCapabilityValue("meter_power", currentEnergy);
-                this.log(`Current production energy is ${currentEnergy}kWh`);
+                this.homey.log(`Current production energy is ${currentEnergy}kWh`);
                 if (!isMetered) {
                     const currentPower = productionData.wattsNow;
                     await this.setCapabilityValue("measure_power", currentPower);
-                    this.log(`Current production power is ${currentPower}W`);
+                    this.homey.log(`Current production power is ${currentPower}W`);
                 }
                 if (isMetered) {
                     // Get production, consumption and net import data from meters
@@ -78,12 +78,12 @@ class EnphaseEnvoy extends inverter_1.Inverter {
                     if (productionPower !== null && gridConsumptionPower !== null) {
                         const selfConsumption = productionPower + gridConsumptionPower;
                         await this.setCapabilityValue("measure_power", productionPower);
-                        this.log(`Current production power is ${productionPower}W`);
+                        this.homey.log(`Current production power is ${productionPower}W`);
                         await this.setCapabilityValue("measure_power.consumption", selfConsumption);
                         await this.setCapabilityValue("measure_power.grid", gridConsumptionPower);
                     }
                     else {
-                        this.log("Envoy is metered but could not fetch either net-consumption or production values from meters");
+                        this.homey.log("Envoy is metered but could not fetch either net-consumption or production values from meters");
                     }
                 }
                 await this.setAvailable();

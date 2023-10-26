@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = require("node-fetch");
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
+async function fetch(...args) {
+    const { default: fetch } = await _importDynamic("node-fetch");
+    return fetch(...args);
+}
 class SolarEdgeApi {
     constructor(apiKey, siteId, serialNumber, timeZone) {
         this.baseUrl = "https://monitoringapi.solaredge.com";
@@ -72,7 +76,7 @@ class SolarEdgeApi {
         return iso.slice(0, 19).replace("T", " ");
     }
     async fetchApiEndpoint(url) {
-        const response = await fetch(url);
+        const response = await fetch(new URL(url));
         // Handle possible errors
         if (!response.ok) {
             if (response.status === 403) {

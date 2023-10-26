@@ -3,7 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const node_fetch_1 = __importDefault(require("node-fetch"));
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
+async function fetch(...args) {
+    const { default: fetch } = await _importDynamic("node-fetch");
+    return fetch(...args);
+}
 const node_http_1 = __importDefault(require("node:http"));
 const node_https_1 = __importDefault(require("node:https"));
 const node_url_1 = require("node:url");
@@ -27,7 +31,7 @@ class EnphaseEnvoyApi {
         const requestHeaders = this.accessToken !== null
             ? { Authorization: `Bearer ${this.accessToken}` }
             : undefined;
-        const response = await (0, node_fetch_1.default)(url, {
+        const response = await fetch(url, {
             headers: requestHeaders,
             // Allow self-signed SSL (Envoy v7 uses self-signed certificate on HTTPS)
             // Keep backwards compatibility to warn users that v5 is not supported anymore
@@ -56,7 +60,7 @@ class EnphaseEnvoyApi {
         const formData = new node_url_1.URLSearchParams();
         formData.append("user[email]", username);
         formData.append("user[password]", password);
-        const authResponse = await (0, node_fetch_1.default)("https://enlighten.enphaseenergy.com/login/login.json", { method: "POST", body: formData });
+        const authResponse = await fetch("https://enlighten.enphaseenergy.com/login/login.json", { method: "POST", body: formData });
         if (!authResponse.ok) {
             throw new Error("Failed to authenticate to Enphase - are your username and password correct?");
         }
@@ -65,7 +69,7 @@ class EnphaseEnvoyApi {
     }
     async getAccessToken() {
         const sessionId = await EnphaseEnvoyApi.getEnphaseSessionId(this.username, this.password);
-        const tokenResponse = await (0, node_fetch_1.default)("https://entrez.enphaseenergy.com/tokens", {
+        const tokenResponse = await fetch("https://entrez.enphaseenergy.com/tokens", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
